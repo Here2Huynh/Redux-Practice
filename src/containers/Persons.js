@@ -21,18 +21,18 @@ class Persons extends Component {
     //     } );
     // }
 
-    personDeletedHandler = (personId) => {
-        this.setState( ( prevState ) => {
-            return { persons: prevState.persons.filter(person => person.id !== personId)}
-        } );
-    }
+    // personDeletedHandler = (personId) => {
+    //     this.setState( ( prevState ) => {
+    //         return { persons: prevState.persons.filter(person => person.id !== personId)}
+    //     } );
+    // }
 
     render () {
         return (
             <div>
             {console.log(this.props)}
                 <AddPerson personAdded={this.props.onAddPerson} />
-                {this.props.persons.map(person => (
+                {this.props.prs.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
@@ -46,14 +46,14 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        persons: state.persons
+        prs: state.persons
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddPerson: () => dispatch({ type: actionTypes.ADD }),
-        onDeletePerson: (id) => dispatch({ type: actionTypes.DELETE, id: id })
+        onAddPerson: (name, age) => dispatch({ type: actionTypes.ADD, personData: { name: name, age: age } }),
+        onDeletePerson: (personId) => dispatch({ type: actionTypes.DELETE, id: personId })
     }
 }
 
